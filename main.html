@@ -1,0 +1,100 @@
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>98.js - Windows 98 Online</title>
+		<link href="https://98.js.org/layout.css" rel="stylesheet" type="text/css">
+		<link href="https://98.js.org/lib/os-gui/layout.css" rel="stylesheet" type="text/css">
+		<link href="https://98.js.org/lib/os-gui/windows-98.css" rel="stylesheet" type="text/css">
+		<link href="https://98.js.org/classic.css" rel="stylesheet" type="text/css">
+		<link rel="apple-touch-icon" sizes="180x180" href="https://98.js.org//apple-touch-icon.png?v=LbWArJzeO7">
+		<link rel="icon" type="image/png" sizes="32x32" href="https://98.js.org//favicon-32x32.png?v=LbWArJzeO7">
+		<link rel="icon" type="image/png" sizes="16x16" href="https://98.js.org//favicon-16x16.png?v=LbWArJzeO7">
+		<link rel="manifest" href="/site.webmanifest?v=LbWArJzeO7">
+		<link rel="mask-icon" href="https://98.js.org//safari-pinned-tab.svg?v=LbWArJzeO7" color="#5bbad5">
+		<link rel="shortcut icon" href="https://98.js.org//favicon.ico?v=LbWArJzeO7">
+		<meta name="apple-mobile-web-app-title" content="98.js">
+		<meta name="application-name" content="98.js">
+		<meta name="msapplication-TileColor" content="#2b5797">
+		<meta name="theme-color" content="#008080">		
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<!-- For Wayback Machine, hopefully get it to save these resources -->
+		<link rel="prefetch" href="https://98.js.org//filesystem-index.json">
+		<link rel="prefetch" href="https://98.js.org//desktop/CREDITS.txt">
+		<link rel="prefetch" href="https://98.js.org//programs/notepad/index.html">
+	</head>
+	<body>
+		<div class="desktop" style="background-image: url(https://98.js.org/images/clouds.jpg); background-size: cover; background-position: center;"></div>
+		<div class="taskbar">
+			<button class="start-button toggle" title="Click here to begin.">
+				<img src="https://98.js.org/images/start.png"/><b>Start</b>
+			</button>
+			<div class="taskbar-divider"></div>
+			<!-- TODO: pinned apps and resizing handles -->
+			<div class="tasks"></div>
+			<div class="taskbar-divider"></div>
+			<div class="tray inset-shallow">
+				<div class="tray-icons">
+					<img class="tray-icon" src="ihttps://98.js.org/mages/icons/task-scheduler-16x16.png" title="Task Scheduler is not ready." onclick="alert('Good day to you!')">
+					<img class="tray-icon" src="https://98.js.org/images/icons/audio-okay-16x16.png" title="Volume" onclick="alert('Have a good day!')">
+				</div>
+				<div class="taskbar-time"></div>
+			</div>
+		</div>
+		<div class="start-menu outset-deep" hidden style="display: none;">
+			<div class="start-menu-titlebar"></div>
+			<div class="start-menu-content">
+				<h1>'S tart</h1>
+				<img src="https://i.postimg.cc/dtxsJq0d/CK1IhDr.gif"/>
+			</div>
+		</div>
+		<script src="https://98.js.org/lib/pep.js"></script>
+		<script src="https://98.js.org/lib/jquery.min.js"></script>
+		<script src="https://98.js.org/lib/browserfs.js"></script>
+		<script src="https://98.js.org/lib/konami.js"></script>
+		<script src="https://98.js.org/lib/os-gui/parse-theme.js"></script>
+		<script src="https://98.js.org/ilb/os-gui/$MenuBar.js"></script>
+		<script src="https://98.js.org/src/3d-fun.js"></script>
+		<script src="https://98.js.org/src/helpers.js"></script>
+		<script src="https://98.js.org/src/filesystem-setup.js"></script>
+		<script src="https://98.js.org/src/$Window.js"></script>
+		<script src="https://98.js.org/src/$IframeWindow.js"></script>
+		<script src="https://98.js.org/src/Task.js"></script>
+		<script src="https://98.js.org/src/$taskbar-time.js"></script>
+		<script src="https://98.js.org/src/$start-menu.js"></script>
+		<script src="https://98.js.org/src/$FolderView.js"></script>
+		<script src="https://98.js.org/src/$FolderViewIcon.js"></script>
+		<script src="https://98.js.org/src/$desktop.js"></script>
+		<script src="https://98.js.org/src/visualizer-overlay.js"></script>
+		<script src="https://98.js.org/src/programs.js"></script>
+
+		<!-- TODO: DRY -->
+		<svg style="position: absolute; pointer-events: none; bottom: 100%;">
+			<defs>
+				<filter id="disabled-inset-filter" x="0" y="0" width="1px" height="1px">
+					<feColorMatrix
+						in="SourceGraphic"
+						type="matrix"
+						values="
+							1 0 0 0 0
+							0 1 0 0 0
+							0 0 1 0 0
+							-1000 -1000 -1000 1 0
+						"
+						result="black-parts-isolated"
+					/>
+					<feFlood result="shadow-color" flood-color="var(--ButtonShadow)"/>
+					<feFlood result="hilight-color" flood-color="var(--ButtonHilight)"/>
+					<feOffset in="black-parts-isolated" dx="1" dy="1" result="offset"/>
+					<feComposite in="hilight-color" in2="offset" operator="in" result="hilight-colored-offset"/>
+					<feComposite in="shadow-color" in2="black-parts-isolated" operator="in" result="shadow-colored"/>
+					<feMerge>
+						<feMergeNode in="hilight-colored-offset"/>
+						<feMergeNode in="shadow-colored"/>
+					</feMerge>
+				</filter>
+			</defs>
+		</svg>
+	</body>
+</html>
